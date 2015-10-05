@@ -1,2 +1,2 @@
 # Web Guesser
-A secret number guessing game! 8^)
+A secret number guessing game!
