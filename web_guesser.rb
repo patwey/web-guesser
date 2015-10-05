@@ -1,7 +1,8 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
-set :number, rand(100)
+set :number => rand(100)
+cheat = 'false'
 
 def check_guess(guess)
   if guess > settings.number + 5
@@ -18,8 +19,13 @@ def check_guess(guess)
 end
 
 get '/' do
-  guess = params['guess'].to_i
-  message = check_guess(guess)
-  erb :index, :locals => {:number => settings.number, :message => message}
-  # pass a hash in with the variable name as a sym pointing to its value
+  if params['guess']
+    guess = params['guess'].to_i
+    message = check_guess(guess)
+  else
+    message = 'Please guess a number between 1 and 100.'
+  end
+  cheat = params['cheat'] if params['cheat']
+  erb :index, :locals => {:number => settings.number, :message => message,
+                          :cheat => cheat}
 end

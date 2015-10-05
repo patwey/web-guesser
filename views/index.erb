@@ -1,5 +1,17 @@
 <html>
-  <head></head>
+  <head>
+    <style>
+      body {
+      <%= if message.include?('Way too')
+            "background: Red;"
+          elsif message.include?('Too')
+            "background: #FF8080;"
+          elsif message == 'You got it right!'
+            "background: Green;"
+          end %>
+      }
+    </style>
+  </head>
   <body>
     <form>
       <input type='text' name='guess' />
@@ -7,7 +19,7 @@
     </form>
     <p> <%= message %></p>
     <p>
-      <%= if message == 'You got it right!'
+      <%= if message == 'You got it right!' || cheat == 'true'
             "The SECRET NUMBER is #{number}"
           end %>
     </p>
